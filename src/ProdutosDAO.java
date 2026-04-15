@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class ProdutosDAO {
 
@@ -34,16 +35,17 @@ public class ProdutosDAO {
             stmt.setString(3, produto.getStatus());
 
             stmt.executeUpdate();
+            
+            stmt.close();
+            conn.close();
+            
+            JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
 
-            if (stmt != null) {
-                stmt.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
         } catch (SQLException e) {
-            System.out.println("Erro ao fechar conexão: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao fechar conexão: " + e.getMessage());
+
         }
+
     }
 
     public ArrayList<ProdutosDTO> listarProdutos() {
